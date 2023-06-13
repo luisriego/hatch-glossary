@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DisciplineRepository;
+use App\Trait\IdentifierTrait;
+use App\ValueObjects\Uuid;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,10 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: DisciplineRepository::class)]
 class Discipline
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    use IdentifierTrait;
 
     #[ORM\Column(length: 70)]
     private ?string $name = null;
@@ -26,12 +25,8 @@ class Discipline
 
     public function __construct()
     {
+        $this->id = Uuid::random()->value();
         $this->glossaries = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getName(): ?string

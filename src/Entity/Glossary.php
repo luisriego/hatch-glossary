@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\GlossaryRepository;
+use App\Trait\IdentifierTrait;
+use App\Trait\TimestampableTrait;
+use App\ValueObjects\Uuid;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,10 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: GlossaryRepository::class)]
 class Glossary
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    use IdentifierTrait;
+    use TimestampableTrait;
 
     #[ORM\Column(length: 200, nullable: true)]
     private ?string $en = null;
@@ -32,12 +33,10 @@ class Glossary
 
     public function __construct()
     {
+        $this->id = Uuid::random()->value();
+        $this->createdOn = new \DateTimeImmutable();
+        $this->markAsUpdated();
         $this->project = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getEn(): ?string
