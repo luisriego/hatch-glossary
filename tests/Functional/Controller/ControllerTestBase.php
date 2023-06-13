@@ -35,7 +35,7 @@ class ControllerTestBase extends WebTestCase
 //        $this->userId = $this->createUser();
     }
 
-    protected function getResponseData(Response $response): array
+    protected function getResponseData(Response $response): ?array
     {
         try {
             return \json_decode($response->getContent(), true);
