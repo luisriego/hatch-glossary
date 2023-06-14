@@ -3,22 +3,24 @@
 namespace App\Repository;
 
 use App\Entity\Client;
+use App\Exception\ResourceNotFoundException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<Client>
- *
- * @method Client|null find($id, $lockMode = null, $lockVersion = null)
- * @method Client|null findOneBy(array $criteria, array $orderBy = null)
- * @method Client[]    findAll()
- * @method Client[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
-class ClientRepository extends ServiceEntityRepository
+class ClientRepository extends ServiceEntityRepository implements ClientRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Client::class);
+    }
+
+    public function add(Client $entity, bool $flush): void
+    {
+        $this->getEntityManager()->persist($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
     }
 
     public function save(Client $entity, bool $flush = false): void
@@ -39,28 +41,17 @@ class ClientRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Client[] Returns an array of Client objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findOneByIdOrFail(string $id): Client
+    {
+        if (null === $client = $this->find($id)) {
+            throw ResourceNotFoundException::createFromClassAndId(Client::class, $id);
+        }
 
-//    public function findOneBySomeField($value): ?Client
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        return $client;
+    }
+
+    public function findOneByCode(string $code): ?Client
+    {
+        return $this->findOneBy(['code' => $code]);
+    }
 }

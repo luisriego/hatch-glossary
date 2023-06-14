@@ -14,6 +14,11 @@ class Client
 {
     use IdentifierTrait;
 
+    public const CODE_MIN_LENGTH = 3; // Brazilian Taxpayer Identification Number (CNPJ);
+    public const CODE_MAX_LENGTH = 3;
+    public const NAME_MIN_LENGTH = 4;
+    public const NAME_MAX_LENGTH = 70;
+
     #[ORM\Column(length: 70, nullable: true)]
     private ?string $name = null;
 
@@ -23,10 +28,22 @@ class Client
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Project::class)]
     private Collection $projects;
 
-    public function __construct()
-    {
+    public function __construct(
+        ?string $code,
+        ?string $name,
+    ) {
         $this->id = Uuid::random()->value();
+        $this->code = $code;
+        $this->name = $name;
         $this->projects = new ArrayCollection();
+    }
+
+    public static function create($code, $name): self
+    {
+        return new static(
+            $code,
+            $name,
+        );
     }
 
     public function getName(): ?string
