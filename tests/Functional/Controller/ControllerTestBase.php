@@ -27,10 +27,10 @@ class ControllerTestBase extends WebTestCase
 //
 //        $jwt = static::getContainer()->get(JWTTokenManagerInterface::class)->create($admin);
 //
-//        self::$admin->setServerParameters([
-//            'CONTENT_TYPE' => 'application/json',
-//            'HTTP_Authorization' => \sprintf('Bearer %s', $jwt)
-//        ]);
+       self::$user->setServerParameters([
+           'CONTENT_TYPE' => 'application/json',
+        //    'HTTP_Authorization' => \sprintf('Bearer %s', $jwt)
+       ]);
 
 //        $this->userId = $this->createUser();
     }

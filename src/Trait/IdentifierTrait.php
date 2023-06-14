@@ -10,7 +10,7 @@ trait IdentifierTrait
 {
     #[ORM\Id]
     #[ORM\Column(type: 'string', length: 36, options: ['fixed' => true])]
-    protected readonly string $id;
+    protected string $id;
 
     public function getId(): string
     {

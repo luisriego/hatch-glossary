@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\ValueObjects;
 
+
 class Uuid implements \Stringable
 {
     public function __construct(protected readonly string $value)
@@ -33,7 +34,7 @@ class Uuid implements \Stringable
 
     private function ensureIsValidUuid(string $id): void
     {
-        if (!\Symfony\Component\Uid\Uuid::isValid($id)) {
+        if (!Symfony\Component\Uid\Uuid::isValid($id)) {
             throw new \InvalidArgumentException(sprintf('<%s> does not allow the value <%s>.', static::class, $id));
         }
     }
