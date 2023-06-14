@@ -53,4 +53,15 @@ ssh-be: ## bash into the be container
 code-style: ## Runs php-cs to fix code styling following Symfony rules
 	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} vendor/bin/php-cs-fixer fix src --rules=@Symfony
 
-# .PHONY: migrations
+code-style-check:
+	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} vendor/bin/php-cs-fixer fix src --rules=@Symfony --dry-run
+
+db-test-creation: ## Create the project databases for test environment
+	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} bin/console doctrine:database:create -n --env=test
+
+migrations-test: ## Run migrations for test environments
+	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} bin/console doctrine:migration:migrate -n --env=test
+
+.PHONY: tests
+tests:
+	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} vendor/bin/simple-phpunit -c phpunit.xml.dist
