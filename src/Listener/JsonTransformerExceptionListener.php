@@ -30,9 +30,9 @@ class JsonTransformerExceptionListener
             $data['code'] = Response::HTTP_BAD_REQUEST;
         }
 
-//        if ($e instanceof AccessDeniedException) {
-//            $data['code'] = Response::HTTP_FORBIDDEN;
-//        }
+        //        if ($e instanceof AccessDeniedException) {
+        //            $data['code'] = Response::HTTP_FORBIDDEN;
+        //        }
 
         $response = new JsonResponse($data, $data['code']);
 
