@@ -16,10 +16,10 @@ jobs:
         continue-on-error: true
       - name: Prepare containers
         run: make start && make composer-install
-      - name: Generate jwt
-        run: make generate-ssh-keys
+#      - name: Generate jwt
+#        run: make generate-ssh-keys
       - name: Run coding style check
-        run: make code-style-check
+        run: make code-style
       - name: buffering time for db container
         uses: jakejarvis/wait-action@master
         with:

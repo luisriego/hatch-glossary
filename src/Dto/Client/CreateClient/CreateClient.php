@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Dto\Client\CreateClient;
 
-
 use App\Dto\Client\CreateClient\Dto\CreateClientInputDto;
 use App\Dto\Client\CreateClient\Dto\CreateClientOutputDto;
 use App\Entity\Client;
