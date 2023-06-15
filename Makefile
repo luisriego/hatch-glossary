@@ -45,10 +45,15 @@ migrations: ## Installs composer dependencies
 logs: ## Show Symfony logs in real time
 	U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BE} symfony server:log
 	
-# End backend commands
 
 ssh-be: ## bash into the be container
 	U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BE} bash
+
+test:
+	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} vendor/bin/phpunit -c phpunit.xml.dist
+
+# End backend commands
+
 
 code-style: ## Runs php-cs to fix code styling following Symfony rules
 	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} vendor/bin/php-cs-fixer fix src --rules=@Symfony
