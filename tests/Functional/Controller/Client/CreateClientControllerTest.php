@@ -30,7 +30,7 @@ class CreateClientControllerTest extends ControllerTestBase
         $responseData = $this->getResponseData($response);
 
         self::assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
-//        self::assertArrayHasKey('id', $responseData);
+        self::assertArrayHasKey('clientId', $responseData);
         self::assertEquals(36, \strlen($responseData['clientId']));
     }
 }
