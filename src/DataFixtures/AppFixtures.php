@@ -22,7 +22,7 @@ class AppFixtures extends Fixture
         $project = Project::create('H999999', 'FAKE PROJECT', $client);
         $manager->persist($project);
 
-        $glossary = Glossary::create($project, $discipline);
+        $glossary = Glossary::create($discipline, $project);
         $manager->persist($glossary);
 
         $manager->flush();
