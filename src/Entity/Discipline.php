@@ -23,10 +23,22 @@ class Discipline
     #[ORM\OneToMany(mappedBy: 'discipline', targetEntity: Glossary::class)]
     private Collection $glossaries;
 
-    public function __construct()
-    {
+    public function __construct(
+        ?string $code,
+        ?string $name,
+    ) {
         $this->id = Uuid::random()->value();
+        $this->code = $code;
+        $this->name = $name;
         $this->glossaries = new ArrayCollection();
+    }
+
+    public static function create($code, $name): self
+    {
+        return new static(
+            $code,
+            $name,
+        );
     }
 
     public function getName(): ?string

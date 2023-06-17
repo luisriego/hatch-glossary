@@ -14,6 +14,12 @@ class Project
 {
     use IdentifierTrait;
 
+    public const NAME_MIN_LENGTH = 4;
+    public const NAME_MAX_LENGTH = 70;
+
+    #[ORM\Column(length: 70, nullable: true)]
+    private ?string $name = null;
+
     #[ORM\Column(length: 7)]
     private ?string $hatchNumber = null;
 
@@ -26,10 +32,42 @@ class Project
     #[ORM\ManyToMany(targetEntity: Glossary::class, mappedBy: 'project')]
     private Collection $glossaries;
 
-    public function __construct()
-    {
+    public function __construct(
+        ?string $hatchNumber,
+        ?string $name,
+        ?Client $client,
+    ) {
         $this->id = Uuid::random()->value();
+        $this->hatchNumber = $hatchNumber;
+        $this->name = $name;
+        $this->client = $client;
         $this->glossaries = new ArrayCollection();
+    }
+
+    public static function create($hatchNumber, $name, $client): self
+    {
+        return new static(
+            $hatchNumber,
+            $name,
+            $client,
+        );
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string|null $name
+     */
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
     }
 
     public function getHatchNumber(): ?string

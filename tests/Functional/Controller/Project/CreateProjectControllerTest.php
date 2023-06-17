@@ -2,25 +2,29 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Controller\Discipline;
+namespace App\Tests\Functional\Controller\Project;
 
+use App\Entity\Client;
+use App\Repository\ClientRepositoryInterface;
 use App\Tests\Functional\Controller\ControllerTestBase;
+use Doctrine\Persistence\ObjectManager;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CreateDisciplineControllerTest extends ControllerTestBase
+class CreateProjectControllerTest extends ControllerTestBase
 {
-    private const ENDPOINT = '/api/discipline/create';
+    private const ENDPOINT = '/api/project/create';
 
     /**
      * @throws Exception
      */
-    public function testCreateDiscipline(): void
+    public function testCreateProject(): void
     {
         $payload = [
-            'code' => '100',
-            'name' => 'Project Management',
+            'hatchNumber' => 'H371234',
+            'name' => 'Onca Puma',
+            'client' => $this->createCli()->getId(),
         ];
 
 
@@ -30,10 +34,7 @@ class CreateDisciplineControllerTest extends ControllerTestBase
         $responseData = $this->getResponseData($response);
 
         self::assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
-        self::assertArrayHasKey('disciplineId', $responseData);
-        self::assertEquals(36, \strlen($responseData['disciplineId']));
+        self::assertArrayHasKey('projectId', $responseData);
+        self::assertEquals(36, \strlen($responseData['projectId']));
     }
-}
-{
-
 }
