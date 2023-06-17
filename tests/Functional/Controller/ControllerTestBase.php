@@ -4,14 +4,24 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Controller;
 
+use App\Entity\Client;
+use App\Repository\ClientRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\AbstractBrowser;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ControllerTestBase extends WebTestCase
 {
+    private const CREATE_CLIENT_ENDPOINT = '/api/client/create';
+
     protected static ?AbstractBrowser $user = null;
     protected string $userId;
+
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $entityManager;
 
     public function setUp(): void
     {
@@ -42,5 +52,12 @@ class ControllerTestBase extends WebTestCase
         } catch (\Exception $e) {
             throw $e;
         }
+    }
+
+    protected function createCli(): Client
+    {
+        $clientRepository = static::getContainer()->get(ClientRepositoryInterface::class);
+
+        return $clientRepository->findOneByCode('999');
     }
 }

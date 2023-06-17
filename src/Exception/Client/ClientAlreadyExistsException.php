@@ -8,6 +8,6 @@ final class ClientAlreadyExistsException extends \DomainException
 {
     public static function createFromCode(string $code): self
     {
-        return new ClientAlreadyExistsException(\sprintf('Client with code <%s> already exists', $code));
+        return new DisciplineAlreadyExistsException(\sprintf('Client with code <%s> already exists', $code));
     }
 }

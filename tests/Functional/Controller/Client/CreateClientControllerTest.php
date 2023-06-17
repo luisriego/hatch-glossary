@@ -34,6 +34,3 @@ class CreateClientControllerTest extends ControllerTestBase
         self::assertEquals(36, \strlen($responseData['clientId']));
     }
 }
-{
-
-}
