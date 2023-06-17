@@ -67,6 +67,9 @@ db-test-creation: ## Create the project databases for test environment
 migrations-test: ## Run migrations for test environments
 	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} bin/console doctrine:migration:migrate -n --env=test
 
+fixtures-test: ## Run fixtures for test environments
+	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} bin/console doctrine:fixtures:load -n --env=test
+
 .PHONY: tests
 tests:
 	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} vendor/bin/phpunit -c phpunit.xml.dist
