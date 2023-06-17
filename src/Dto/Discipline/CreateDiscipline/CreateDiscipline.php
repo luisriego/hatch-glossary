@@ -8,7 +8,7 @@ use App\Dto\Discipline\CreateDiscipline\Dto\CreateDisciplineInputDto;
 use App\Dto\Discipline\CreateDiscipline\Dto\CreateDisciplineOutputDto;
 use App\Entity\Discipline;
 use App\Exception\Discipline\ProjectAlreadyExistsException;
-use App\Repository\DisciplineRepositoryInterface;
+use App\Repository\Contracts\DisciplineRepositoryInterface;
 
 class CreateDiscipline
 {

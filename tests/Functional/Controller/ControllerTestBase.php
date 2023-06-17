@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Controller;
 
 use App\Entity\Client;
-use App\Repository\ClientRepositoryInterface;
+use App\Entity\Discipline;
+use App\Entity\Project;
+use App\Repository\Contracts\ClientRepositoryInterface;
+use App\Repository\Contracts\DisciplineRepositoryInterface;
+use App\Repository\Contracts\ProjectRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\AbstractBrowser;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ControllerTestBase extends WebTestCase
@@ -59,5 +62,19 @@ class ControllerTestBase extends WebTestCase
         $clientRepository = static::getContainer()->get(ClientRepositoryInterface::class);
 
         return $clientRepository->findOneByCode('999');
+    }
+
+    protected function createProject(): Project
+    {
+        $projectRepository = static::getContainer()->get(ProjectRepositoryInterface::class);
+
+        return $projectRepository->findOneByHatchNumber('H999999');
+    }
+
+    protected function createDiscipline(): Discipline
+    {
+        $disciplineRepository = static::getContainer()->get(DisciplineRepositoryInterface::class);
+
+        return $disciplineRepository->findOneByCode('999');
     }
 }

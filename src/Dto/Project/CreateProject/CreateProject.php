@@ -10,8 +10,8 @@ use App\Entity\Client;
 use App\Entity\Project;
 use App\Exception\Project\ProjectAlreadyExistsException;
 use App\Exception\ResourceNotFoundException;
-use App\Repository\ClientRepositoryInterface;
-use App\Repository\ProjectRepositoryInterface;
+use App\Repository\Contracts\ClientRepositoryInterface;
+use App\Repository\Contracts\ProjectRepositoryInterface;
 
 class CreateProject
 {

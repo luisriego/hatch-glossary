@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\ClientRepositoryInterface;
+use App\Repository\Contracts\ClientRepositoryInterface;
 use App\Trait\IdentifierTrait;
 use App\ValueObjects\Uuid;
 use Doctrine\Common\Collections\ArrayCollection;
