@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Discipline;
 use App\Exception\ResourceNotFoundException;
+use App\Repository\Contracts\DisciplineRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

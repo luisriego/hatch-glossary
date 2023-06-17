@@ -8,7 +8,7 @@ use App\Dto\Client\CreateClient\Dto\CreateClientInputDto;
 use App\Dto\Client\CreateClient\Dto\CreateClientOutputDto;
 use App\Entity\Client;
 use App\Exception\Client\ClientAlreadyExistsException;
-use App\Repository\ClientRepositoryInterface;
+use App\Repository\Contracts\ClientRepositoryInterface;
 
 class CreateClient
 {

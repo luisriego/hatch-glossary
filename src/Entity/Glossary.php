@@ -31,12 +31,24 @@ class Glossary
     #[ORM\ManyToOne(inversedBy: 'glossaries')]
     private ?Discipline $discipline = null;
 
-    public function __construct()
-    {
+    public function __construct(
+        ?Discipline $discipline,
+        ?Project $project,
+    ) {
         $this->id = Uuid::random()->value();
         $this->createdOn = new \DateTimeImmutable();
         $this->markAsUpdated();
         $this->project = new ArrayCollection();
+        $this->addProject($project);
+        $this->discipline = $discipline;
+    }
+
+    public static function create($discipline, $project): self
+    {
+        return new static(
+            $discipline,
+            $project,
+        );
     }
 
     public function getEn(): ?string

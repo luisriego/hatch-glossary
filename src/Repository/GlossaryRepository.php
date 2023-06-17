@@ -3,18 +3,13 @@
 namespace App\Repository;
 
 use App\Entity\Glossary;
+use App\Exception\ResourceNotFoundException;
+use App\Repository\Contracts\GlossaryRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<Glossary>
- *
- * @method Glossary|null find($id, $lockMode = null, $lockVersion = null)
- * @method Glossary|null findOneBy(array $criteria, array $orderBy = null)
- * @method Glossary[]    findAll()
- * @method Glossary[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
-class GlossaryRepository extends ServiceEntityRepository
+class GlossaryRepository extends ServiceEntityRepository implements GlossaryRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -39,28 +34,31 @@ class GlossaryRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Glossary[] Returns an array of Glossary objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('g.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function add(Glossary $entity, bool $flush): void
+    {
+        $this->getEntityManager()->persist($entity);
 
-//    public function findOneBySomeField($value): ?Glossary
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findOneByIdOrFail($id): Glossary
+    {
+        $glossary = $this->createQueryBuilder('g')
+            ->andWhere('g.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        if (null === $glossary) {
+            throw ResourceNotFoundException::createFromClassAndId(Glossary::class, $id);
+        }
+
+        return $glossary;
+    }
 }

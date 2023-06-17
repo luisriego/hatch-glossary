@@ -2,26 +2,25 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional\Controller\Project;
+namespace App\Tests\Functional\Controller\Glossary;
 
 use App\Tests\Functional\Controller\ControllerTestBase;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CreateProjectControllerTest extends ControllerTestBase
+class CreateGlossaryControllerTest extends ControllerTestBase
 {
-    private const ENDPOINT = '/api/project/create';
+    private const ENDPOINT = '/api/glossary/create';
 
     /**
      * @throws Exception
      */
-    public function testCreateProject(): void
+    public function testCreateGlossary(): void
     {
         $payload = [
-            'hatchNumber' => 'H371234',
-            'name' => 'Onca Puma',
-            'client' => $this->createCli()->getId(),
+            'discipline' => $this->createDiscipline()->getId(),
+            'project' => $this->createProject()->getId(),
         ];
 
 
@@ -31,7 +30,7 @@ class CreateProjectControllerTest extends ControllerTestBase
         $responseData = $this->getResponseData($response);
 
         self::assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
-        self::assertArrayHasKey('projectId', $responseData);
-        self::assertEquals(36, \strlen($responseData['projectId']));
+        self::assertArrayHasKey('glossaryId', $responseData);
+        self::assertEquals(36, \strlen($responseData['glossaryId']));
     }
 }

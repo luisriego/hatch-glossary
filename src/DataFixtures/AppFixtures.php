@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Client;
 use App\Entity\Discipline;
+use App\Entity\Glossary;
 use App\Entity\Project;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -20,6 +21,9 @@ class AppFixtures extends Fixture
 
         $project = Project::create('H999999', 'FAKE PROJECT', $client);
         $manager->persist($project);
+
+        $glossary = Glossary::create($project, $discipline);
+        $manager->persist($glossary);
 
         $manager->flush();
     }
