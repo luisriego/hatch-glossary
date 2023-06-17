@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Dto\Discipline\CreateDiscipline;
 
-use App\Entity\Discipline;
 use App\Dto\Discipline\CreateDiscipline\Dto\CreateDisciplineInputDto;
 use App\Dto\Discipline\CreateDiscipline\Dto\CreateDisciplineOutputDto;
+use App\Entity\Discipline;
 use App\Exception\Discipline\ProjectAlreadyExistsException;
 use App\Repository\DisciplineRepositoryInterface;
 

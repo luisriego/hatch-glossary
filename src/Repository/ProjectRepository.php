@@ -69,7 +69,7 @@ class ProjectRepository extends ServiceEntityRepository implements ProjectReposi
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult()
-            ;
+        ;
     }
 
     public function findOneByHatchNumber(string $hatchNumber): ?Project
