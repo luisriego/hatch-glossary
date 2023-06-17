@@ -12,7 +12,7 @@ class CreateProjectInputDto
     private const ARGS = [
         'hatchNumber',
         'name',
-        'client'
+        'client',
     ];
 
     public function __construct(public string $hatchNumber, public string $name, public string $client)

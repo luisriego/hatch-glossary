@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller\Discipline;
 
-
 use App\Dto\Discipline\CreateDiscipline\CreateDiscipline;
 use App\Dto\Discipline\CreateDiscipline\Dto\CreateDisciplineInputDto;
 use App\Dto\Discipline\CreateDisciplineRequestDto;
