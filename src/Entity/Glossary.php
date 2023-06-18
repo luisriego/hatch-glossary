@@ -16,6 +16,9 @@ class Glossary
     use IdentifierTrait;
     use TimestampableTrait;
 
+    public const GLOSSARY_MIN_LENGTH = 36;
+    public const GLOSSARY_MAX_LENGTH = 36;
+
     #[ORM\Column(length: 200, nullable: true)]
     private ?string $en = null;
 
@@ -121,5 +124,17 @@ class Glossary
         $this->discipline = $discipline;
 
         return $this;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'project' => $this->project,
+            'discipline' => $this->discipline->getName(),
+            'en' => $this->getEn(),
+            'es' => $this->getEs(),
+            'pt' => $this->getPt(),
+        ];
     }
 }
