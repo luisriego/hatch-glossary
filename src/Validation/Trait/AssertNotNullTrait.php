@@ -6,7 +6,7 @@ namespace App\Validation\Trait;
 
 use App\Exception\InvalidArgumentException;
 
-class AssertNotNullTrait
+trait AssertNotNullTrait
 {
     public function assertNotNull(array $args, array $values): void
     {

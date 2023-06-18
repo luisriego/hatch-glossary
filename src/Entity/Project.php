@@ -14,6 +14,8 @@ class Project
 {
     use IdentifierTrait;
 
+    public const HATCHNUMBER_MIN_LENGTH = 7;
+    public const HATCHNUMBER_MAX_LENGTH = 7;
     public const NAME_MIN_LENGTH = 4;
     public const NAME_MAX_LENGTH = 70;
 

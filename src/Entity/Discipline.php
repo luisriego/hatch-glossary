@@ -14,6 +14,11 @@ class Discipline
 {
     use IdentifierTrait;
 
+    public const CODE_MIN_LENGTH = 3;
+    public const CODE_MAX_LENGTH = 5;
+    public const NAME_MIN_LENGTH = 4;
+    public const NAME_MAX_LENGTH = 70;
+
     #[ORM\Column(length: 70)]
     private ?string $name = null;
 

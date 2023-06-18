@@ -34,4 +34,69 @@ class CreateProjectControllerTest extends ControllerTestBase
         self::assertArrayHasKey('projectId', $responseData);
         self::assertEquals(36, \strlen($responseData['projectId']));
     }
+
+
+    public function testCreateProjectWithNameTooShort(): void
+    {
+        $payload = [
+            'hatchNumber' => 'H371234',
+            'name' => 'Onc',
+            'client' => $this->createCli()->getId(),
+        ];
+
+
+        self::$user->request(Request::METHOD_POST, self::ENDPOINT,[], [], [], \json_encode($payload));
+
+        $response = self::$user->getResponse();
+
+        self::assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
+    }
+
+    public function testCreateProjectWithNameTooLong(): void
+    {
+        $payload = [
+            'hatchNumber' => 'H371234',
+            'name' => 'A while back I needed to count the amount of letters that a piece of te',
+            'client' => $this->createCli()->getId(),
+        ];
+
+
+        self::$user->request(Request::METHOD_POST, self::ENDPOINT,[], [], [], \json_encode($payload));
+
+        $response = self::$user->getResponse();
+
+        self::assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
+    }
+
+    public function testCreateProjectWithHatchNumberTooShort(): void
+    {
+        $payload = [
+            'hatchNumber' => 'H37123',
+            'name' => 'Onca Puma',
+            'client' => $this->createCli()->getId(),
+        ];
+
+
+        self::$user->request(Request::METHOD_POST, self::ENDPOINT,[], [], [], \json_encode($payload));
+
+        $response = self::$user->getResponse();
+
+        self::assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
+    }
+
+    public function testCreateProjectWithHatchNumberTooLong(): void
+    {
+        $payload = [
+            'hatchNumber' => 'H3712345',
+            'name' => 'Onca Puma',
+            'client' => $this->createCli()->getId(),
+        ];
+
+
+        self::$user->request(Request::METHOD_POST, self::ENDPOINT,[], [], [], \json_encode($payload));
+
+        $response = self::$user->getResponse();
+
+        self::assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
+    }
 }

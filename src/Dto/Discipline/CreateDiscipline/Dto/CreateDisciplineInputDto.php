@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace App\Dto\Discipline\CreateDiscipline\Dto;
 
+use App\Entity\Discipline;
+use App\Validation\Trait\AssertLengthRangeTrait;
+use App\Validation\Trait\AssertNotNullTrait;
+
 class CreateDisciplineInputDto
 {
-    //     use AssertNotNullTrait;
-    //     use AssertLengthRangeTrait;
+    use AssertNotNullTrait;
+    use AssertLengthRangeTrait;
 
     private const ARGS = [
         'code',
@@ -16,10 +20,10 @@ class CreateDisciplineInputDto
 
     public function __construct(public string $code, public string $name)
     {
-        // $this->assertNotNull(self::ARGS, [$this->code, $this->name]);
+        $this->assertNotNull(self::ARGS, [$this->code, $this->name]);
 
-        // $this->assertValueRangeLength($this->code, Discipline::CODE_MIN_LENGTH, Discipline::CODE_MAX_LENGTH);
-        // $this->assertValueRangeLength($this->name, Discipline::NAME_MIN_LENGTH, Discipline::NAME_MAX_LENGTH);
+        $this->assertValueRangeLength($this->code, Discipline::CODE_MIN_LENGTH, Discipline::CODE_MAX_LENGTH);
+        $this->assertValueRangeLength($this->name, Discipline::NAME_MIN_LENGTH, Discipline::NAME_MAX_LENGTH);
     }
 
     public static function create(?string $code, ?string $name): self
