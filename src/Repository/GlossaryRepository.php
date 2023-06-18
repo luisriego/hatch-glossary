@@ -61,4 +61,13 @@ class GlossaryRepository extends ServiceEntityRepository implements GlossaryRepo
 
         return $glossary;
     }
+
+    public function findOneOrFail(): Glossary
+    {
+        if (null === $glossary = $this->findOneBy([])) {
+            throw ResourceNotFoundException::createFromClassAndId(Glossary::class, '');
+        }
+
+        return $glossary;
+    }
 }

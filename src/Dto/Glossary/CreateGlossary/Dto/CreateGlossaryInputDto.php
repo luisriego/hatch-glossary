@@ -10,8 +10,8 @@ class CreateGlossaryInputDto
     //     use AssertLengthRangeTrait;
 
     private const ARGS = [
-        'discipline',
-        'project',
+//        'discipline',
+//        'project',
     ];
 
     public function __construct(public string $discipline, public string $project)

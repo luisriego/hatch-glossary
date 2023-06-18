@@ -6,9 +6,11 @@ namespace App\Tests\Functional\Controller;
 
 use App\Entity\Client;
 use App\Entity\Discipline;
+use App\Entity\Glossary;
 use App\Entity\Project;
 use App\Repository\Contracts\ClientRepositoryInterface;
 use App\Repository\Contracts\DisciplineRepositoryInterface;
+use App\Repository\Contracts\GlossaryRepositoryInterface;
 use App\Repository\Contracts\ProjectRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\AbstractBrowser;
@@ -76,5 +78,12 @@ class ControllerTestBase extends WebTestCase
         $disciplineRepository = static::getContainer()->get(DisciplineRepositoryInterface::class);
 
         return $disciplineRepository->findOneByCode('999');
+    }
+
+    protected function getOneGlossary(): Glossary
+    {
+        $glossaryRepository = static::getContainer()->get(GlossaryRepositoryInterface::class);
+
+        return $glossaryRepository->findOneOrFail();
     }
 }

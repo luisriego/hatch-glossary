@@ -15,4 +15,6 @@ interface GlossaryRepositoryInterface
     public function remove(Glossary $glossary, bool $flush): void;
 
     public function findOneByIdOrFail(string $id): Glossary;
+
+    public function findOneOrFail(): Glossary;
 }
