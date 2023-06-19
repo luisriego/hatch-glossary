@@ -6,8 +6,6 @@ use App\Repository\GlossaryRepository;
 use App\Trait\IdentifierTrait;
 use App\Trait\TimestampableTrait;
 use App\ValueObjects\Uuid;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GlossaryRepository::class)]
@@ -100,18 +98,18 @@ class Glossary
 
         return $this;
     }
-    
-        public function getProject(): ?Project
-        {
-            return $this->project;
-        }
-    
-        public function setProject(?Project $project): static
-        {
-            $this->project = $project;
-    
-            return $this;
-        }
+
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Project $project): static
+    {
+        $this->project = $project;
+
+        return $this;
+    }
 
     public function toArray(): array
     {
