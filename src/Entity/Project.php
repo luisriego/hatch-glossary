@@ -31,7 +31,7 @@ class Project
     #[ORM\ManyToOne(inversedBy: 'projects')]
     private ?Client $client = null;
 
-    #[ORM\ManyToMany(targetEntity: Glossary::class, mappedBy: 'project')]
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: Glossary::class)]
     private Collection $glossaries;
 
     public function __construct(
@@ -113,7 +113,7 @@ class Project
     {
         if (!$this->glossaries->contains($glossary)) {
             $this->glossaries->add($glossary);
-            $glossary->addProject($this);
+            $glossary->setProject($this);
         }
 
         return $this;
@@ -122,7 +122,10 @@ class Project
     public function removeGlossary(Glossary $glossary): static
     {
         if ($this->glossaries->removeElement($glossary)) {
-            $glossary->removeProject($this);
+            // set the owning side to null (unless already changed)
+            if ($glossary->getProject() === $this) {
+                $glossary->setProject(null);
+            }
         }
 
         return $this;

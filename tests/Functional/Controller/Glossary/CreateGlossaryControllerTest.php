@@ -33,4 +33,34 @@ class CreateGlossaryControllerTest extends ControllerTestBase
         self::assertArrayHasKey('glossaryId', $responseData);
         self::assertEquals(36, \strlen($responseData['glossaryId']));
     }
+
+    public function testCreateGlossaryWithoutDiscipline(): void
+    {
+        $payload = [
+            'discipline' => '87458482-e787-4695-99d3-0a1a1f804b2b',
+            'project' => $this->createProject()->getId(),
+        ];
+
+
+
+        self::$user->request(Request::METHOD_POST, self::ENDPOINT,[], [], [], \json_encode($payload));
+
+        $response = self::$user->getResponse();
+
+        self::assertEquals(Response::HTTP_NOT_FOUND, $response->getStatusCode());
+    }
+
+    public function testCreateGlossaryWithoutProject(): void
+    {
+        $payload = [
+            'discipline' => $this->createDiscipline()->getId(),
+            'project' => '87458482-e787-4695-99d3-0a1a1f804b2b',
+        ];
+
+        self::$user->request(Request::METHOD_POST, self::ENDPOINT,[], [], [], \json_encode($payload));
+
+        $response = self::$user->getResponse();
+
+        self::assertEquals(Response::HTTP_NOT_FOUND, $response->getStatusCode());
+    }
 }
