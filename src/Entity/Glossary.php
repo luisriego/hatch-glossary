@@ -6,8 +6,6 @@ use App\Repository\GlossaryRepository;
 use App\Trait\IdentifierTrait;
 use App\Trait\TimestampableTrait;
 use App\ValueObjects\Uuid;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GlossaryRepository::class)]
@@ -28,11 +26,11 @@ class Glossary
     #[ORM\Column(length: 200, nullable: true)]
     private ?string $es = null;
 
-    #[ORM\ManyToMany(targetEntity: Project::class, inversedBy: 'glossaries')]
-    private Collection $project;
-
     #[ORM\ManyToOne(inversedBy: 'glossaries')]
     private ?Discipline $discipline = null;
+
+    #[ORM\ManyToOne(inversedBy: 'glossaries')]
+    private ?Project $project = null;
 
     public function __construct(
         ?Discipline $discipline,
@@ -41,8 +39,7 @@ class Glossary
         $this->id = Uuid::random()->value();
         $this->createdOn = new \DateTimeImmutable();
         $this->markAsUpdated();
-        $this->project = new ArrayCollection();
-        $this->addProject($project);
+        $this->setProject($project);
         $this->discipline = $discipline;
     }
 
@@ -90,30 +87,6 @@ class Glossary
         return $this;
     }
 
-    /**
-     * @return Collection<int, Project>
-     */
-    public function getProject(): Collection
-    {
-        return $this->project;
-    }
-
-    public function addProject(Project $project): static
-    {
-        if (!$this->project->contains($project)) {
-            $this->project->add($project);
-        }
-
-        return $this;
-    }
-
-    public function removeProject(Project $project): static
-    {
-        $this->project->removeElement($project);
-
-        return $this;
-    }
-
     public function getDiscipline(): ?Discipline
     {
         return $this->discipline;
@@ -122,6 +95,18 @@ class Glossary
     public function setDiscipline(?Discipline $discipline): static
     {
         $this->discipline = $discipline;
+
+        return $this;
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Project $project): static
+    {
+        $this->project = $project;
 
         return $this;
     }
