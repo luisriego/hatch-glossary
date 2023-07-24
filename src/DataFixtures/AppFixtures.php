@@ -23,6 +23,8 @@ class AppFixtures extends Fixture
         $manager->persist($project);
 
         $glossary = Glossary::create($discipline, $project);
+        $glossary->setEn('crane');
+        $glossary->setPt('ponte rolante');
         $manager->persist($glossary);
 
         $manager->flush();

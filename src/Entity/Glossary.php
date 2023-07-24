@@ -16,6 +16,10 @@ class Glossary
 
     public const GLOSSARY_MIN_LENGTH = 36;
     public const GLOSSARY_MAX_LENGTH = 36;
+    public const TERM_MIN_LENGTH = 1;
+    public const TERM_MAX_LENGTH = 200;
+    public const LANGUAGE_MIN_LENGTH = 2;
+    public const LANGUAGE_MAX_LENGTH = 2;
 
     #[ORM\Column(length: 200, nullable: true)]
     private ?string $en = null;
