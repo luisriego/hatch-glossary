@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Dto\Glossary\GetTranslationByLang;
 
-use App\Dto\Glossary\GetTranslationByLang\Dto\GetTranslationByLangOutputDto;
 use App\Dto\Glossary\GetTranslationByLang\Dto\GetTranslationByLangInputDto;
+use App\Dto\Glossary\GetTranslationByLang\Dto\GetTranslationByLangOutputDto;
 use App\Entity\Glossary;
 use App\Exception\ResourceNotFoundException;
 use App\Repository\Contracts\GlossaryRepositoryInterface;
