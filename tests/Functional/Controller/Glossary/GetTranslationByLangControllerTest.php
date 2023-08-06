@@ -18,7 +18,7 @@ class GetTranslationByLangControllerTest extends ControllerTestBase
      */
     public function testGetTranslationByLanguage(): void
     {
-        $glossary = 'e30e319d-8b46-4d81-bb3d-14385f9883ed';
+        $glossary = $this->getOneGlossary()->getId();
         $term = 'crane';
         $language = 'en';
 
