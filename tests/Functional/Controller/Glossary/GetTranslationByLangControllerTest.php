@@ -31,5 +31,6 @@ class GetTranslationByLangControllerTest extends ControllerTestBase
         self::assertArrayHasKey('en', $responseData);
         self::assertArrayHasKey('es', $responseData);
         self::assertArrayHasKey('pt', $responseData);
+        self::assertEquals('ponte rolante', $responseData['pt']);
     }
 }
