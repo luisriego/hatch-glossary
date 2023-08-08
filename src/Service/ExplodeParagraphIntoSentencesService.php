@@ -16,7 +16,7 @@ class ExplodeParagraphIntoSentencesService
     }
 
     // function to explode paragraph into sentences
-    function explodeParagraphIntoSentences($paragraph)
+    public function explodeParagraphIntoSentences($paragraph)
     {
         return preg_split('/(?<=[.!?])\s+/', $paragraph, -1, PREG_SPLIT_NO_EMPTY);
     }
