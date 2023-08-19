@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Unit;
+namespace App\Tests\Unit\Translation;
 
-use PHPUnit\Framework\TestCase;
 use App\Service\ExplodeParagraphIntoSentencesService;
+use PHPUnit\Framework\TestCase;
 
 class ExplodeParagraphTest extends TestCase
 {
