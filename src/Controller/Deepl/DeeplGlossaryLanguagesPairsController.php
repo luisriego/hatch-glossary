@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Deepl;
 
-use App\Dto\Deepl\TranslateRequestDto;
 use App\Service\DeepLLanguagesPairsService;
-use App\Service\DeepLTranslatorService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

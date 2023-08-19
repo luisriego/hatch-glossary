@@ -31,9 +31,9 @@ class DeepLLanguagesPairsService
      */
     public function __invoke()
     {
-        $response = $this->httpClient->request('GET', $this->deeplApiUrl . 'glossary-language-pairs', [
+        $response = $this->httpClient->request('GET', $this->deeplApiUrl.'glossary-language-pairs', [
             'headers' => [
-                'Authorization' => 'DeepL-Auth-Key ' . $this->deeplApiKey,
+                'Authorization' => 'DeepL-Auth-Key '.$this->deeplApiKey,
             ],
         ]);
 

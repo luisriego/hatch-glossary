@@ -31,9 +31,9 @@ class DeepLTranslatorService
      */
     public function __invoke(?string $text, ?string $targetLang)
     {
-        $response = $this->httpClient->request('POST', $this->deeplApiUrl . 'translate', [
+        $response = $this->httpClient->request('POST', $this->deeplApiUrl.'translate', [
             'headers' => [
-                'Authorization' => 'DeepL-Auth-Key ' . $this->deeplApiKey,
+                'Authorization' => 'DeepL-Auth-Key '.$this->deeplApiKey,
             ],
             'body' => [
                 'text' => $text,
@@ -42,6 +42,7 @@ class DeepLTranslatorService
         ]);
 
         $data = $response->toArray();
+
         return $data['translations'][0]['text'];
     }
 }

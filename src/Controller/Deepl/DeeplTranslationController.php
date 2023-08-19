@@ -34,8 +34,8 @@ class DeeplTranslationController extends AbstractController
     {
         $text = $request->text;
         $targetLang = $request->lang;
-//        $text = "Hello, how are you?";
-//        $targetLang = 'DE'; // Replace with your desired target language code.
+        //        $text = "Hello, how are you?";
+        //        $targetLang = 'DE'; // Replace with your desired target language code.
 
         $translatedText = $this->deepLTranslatorService->__invoke($text, $targetLang);
 

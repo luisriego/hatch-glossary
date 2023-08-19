@@ -12,7 +12,6 @@ class TranslateRequestDto implements RequestDto
     public string $text;
     public string $lang;
 
-
     public function __construct(Request $request)
     {
         $this->text = $request->request->get('text');

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Dto\Deepl\Translate\Dto;
 
-use App\Entity\Project;
 use App\Validation\Trait\AssertLengthRangeTrait;
 use App\Validation\Trait\AssertNotNullTrait;
 
