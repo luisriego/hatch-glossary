@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Dto\Project\CreateProject;
 
-use App\Dto\Project\CreateProject\Dto\CreateProjectInputDto;
-use App\Dto\Project\CreateProject\Dto\CreateProjectOutputDto;
+use App\Dto\Project\CreateProject\Dto\TranslateInputDto;
+use App\Dto\Project\CreateProject\Dto\TranslateOutputDto;
 use App\Entity\Client;
 use App\Entity\Project;
 use App\Exception\Project\ProjectAlreadyExistsException;
@@ -24,7 +24,7 @@ class CreateProject
     ) {
     }
 
-    public function handle(CreateProjectInputDto $inputDto): CreateProjectOutputDto
+    public function handle(TranslateInputDto $inputDto): TranslateOutputDto
     {
         if (null !== $this->repository->findOneByHatchNumber($inputDto->hatchNumber)) {
             throw ProjectAlreadyExistsException::createFromCode($inputDto->hatchNumber);
@@ -51,6 +51,6 @@ class CreateProject
 
         $this->repository->save($project, true);
 
-        return new CreateProjectOutputDto($project->getId());
+        return new TranslateOutputDto($project->getId());
     }
 }

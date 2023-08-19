@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller\Project;
 
 use App\Dto\Project\CreateProject\CreateProject;
-use App\Dto\Project\CreateProject\Dto\CreateProjectInputDto;
 use App\Dto\Project\CreateProjectRequestDto;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +21,7 @@ class CreateProjectController extends AbstractController
     public function __invoke(CreateProjectRequestDto $request): Response
     {
         $responseDto = $this->createProject->handle(
-            CreateProjectInputDto::create(
+            CreateProjectRequestDto::create(
                 $request->hatchNumber,
                 $request->name,
                 $request->client,
