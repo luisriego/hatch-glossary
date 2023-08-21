@@ -17,7 +17,7 @@ class DeepTranlationTest extends TestCase
 
     public function setUp(): void
     {
-        $this->deepLTranslatorService = new DeepLTranslatorService('0b9ccd94-30dd-83a6-6c9d-901370c7afbc:fx', 'https://api-free.deepl.com/v2/');
+        $this->deepLTranslatorService = new DeepLTranslatorService($deeplKey, 'https://api-free.deepl.com/v2/');
     }
 
     /**
